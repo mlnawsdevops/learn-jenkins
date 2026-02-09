@@ -70,7 +70,7 @@ pipeline {
 
         stage('deploy'){
             when{
-                expression{env.GIT_BRANCH = "origin/main."}
+                expression{env.GIT_BRANCH = "origin/maiddn."}
             }
             steps{
                 sh 'echo This is deploy'
