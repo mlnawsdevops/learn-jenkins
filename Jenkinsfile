@@ -42,6 +42,20 @@ pipeline {
             }
         }
 
+        stage('Example') {
+            input {
+                message "Should we continue?"
+                ok "Yes, we should."
+                submitter "alice,bob"
+                parameters {
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                }
+            }
+            steps {
+                echo "Hello, ${PERSON}, nice to meet you."
+            }
+        }
+
         stage('build'){
             steps{
                 sh 'echo This is build'
@@ -53,7 +67,7 @@ pipeline {
                 sh 'echo This is test'
             }
         }
-        
+
         stage('deploy'){
             steps{
                 sh 'echo This is deploy'
