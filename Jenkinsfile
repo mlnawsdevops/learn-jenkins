@@ -1,14 +1,14 @@
 pipeline {
     agent {
-        label 'AGENT-1' 
+        label 'AGENT-1' // jenkins-agent
     }
 
-    options{
-        timeout(time: 30, unit: 'MINUTES')
-        disableConcurrentBuilds()
+    options{ 
+        timeout(time: 30, unit: 'MINUTES') // time for jobs
+        disableConcurrentBuilds() // only one build at a time
     }
 
-    parameters{
+    parameters{ // passing variables dynamically
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
 
         text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
@@ -23,7 +23,7 @@ pipeline {
     stages {
         stage('Example') {
             steps {
-                echo "Hello ${params.PERSON}"
+                echo "Hello ${params.PERSON}" // parameters or variable using
 
                 echo "Biography: ${params.BIOGRAPHY}"
 
@@ -43,7 +43,7 @@ pipeline {
         }
 
         stage('input') {
-            input {
+            input { // input approval
                 message "Should we continue?"
                 ok "Yes, we should."
                 submitter "alice,bob"
@@ -69,8 +69,8 @@ pipeline {
         }
 
         stage('deploy'){
-            when{
-                expression{env.GIT_BRANCH = "origin/main"}
+            when{ // when condition
+                expression {env.GIT_BRANCH = "origin/main"}
             }
             steps{
                 sh 'echo This is deploy'
