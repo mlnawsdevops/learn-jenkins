@@ -3,13 +3,14 @@ pipeline {
         label 'AGENT-1' 
     }
     options{
-        timeout(time: 10, unit: 'SECONDS')
+        timeout(time: 30, unit: 'MINUTES')
+        disableConcurrentBuilds()
     }
     stages {
         stage('code'){
             steps {
                 sh 'echo This is code'
-                sh 'sleep 10'
+                sh 'sleep 10
             }
         }
         stage('build'){
